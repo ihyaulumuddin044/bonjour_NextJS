@@ -4,7 +4,7 @@ import NavbarBody from "../Navbar";
 type AppShellProps = {
   children: React.ReactNode,
 }
-const navbarDesible = ['/auth/login', "auth/register"]
+const navbarDesible = ['/auth/login', "/auth/register"]
 
 const AppShell = (props: AppShellProps) => {
   const { children } = props;

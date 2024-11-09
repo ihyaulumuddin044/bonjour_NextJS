@@ -1,0 +1,14 @@
+@import "@/styles/Colors.scss";
+
+.login {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    justify-items: center;
+    align-items: center;
+    text-align: center;
+    font-size: large;
+    background-color: map-get($map: $Schema, $key: primary);      
+    }
