@@ -12,7 +12,7 @@ const LoginPagesView = () => {
   return (
     <div className={Style.login}>
       <h1>login Pages</h1>
-      <button className="text-blue-500 shadow-sm bg-cyan-500" onClick={() => hendleProduct()}>product</button>
+      <button className="text-blue-500 shadow-sm bg-slate-600 rounded-xl w-[100px]" onClick={() => hendleProduct()}>product</button>
       <p style={{color: "red", }}>
         belum punya akun? <Link href="/auth/register">register</Link>
       </p>
