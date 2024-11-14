@@ -1,13 +1,9 @@
+import ProductView from "@/views/Product";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 
-type productType = {
-  id: number,
-  name: string,
-  harga: number,
-  ukuran: string
-}
+
 const productPage = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [products, setProducts] = useState([]);
@@ -24,15 +20,10 @@ const productPage = () => {
         setProducts(response.data);
       });
     });
-  });
+  }, []);
   return (
     <div>
-      <h1>product pages test</h1>
-      {products.map((product: productType) => (
-        <div key={product.id}>
-          <p>{product.name}</p>
-        </div>
-      ))}
+      <ProductView products={products}/>
     </div>
   );
 };
