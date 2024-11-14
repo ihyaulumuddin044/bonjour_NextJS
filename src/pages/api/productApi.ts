@@ -1,35 +1,19 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiRequest, NextApiResponse } from 'next'
+import { retriveData } from '@/lib/firebase/service';
+import type { NextApiRequest, NextApiResponse } from 'next';
 
 type Data = {
     status: boolean,
     statusCode: number,
-    data: {
+    data: any,
+};
 
-        id: number,
-        name: string,
-        harga: number,
-        ukuran: string
-    }[];
-}
-
-
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-    const data =[{
-        id: 1,
-        name: "Hoodie",
-        harga: 100000,
-        ukuran: "XL",
-    },
-    {
-        id: 2,
-        name: "Hoodie baru",
-        harga: 200000,
-        ukuran: "XL, L",
-    }
-]
-  res.status(200).json({ status: true, statusCode: 200, data })
+  const apiKey = process.env.FIREBASE_API_KEY;
+    const data = await retriveData('product');
+    console.log('Data retrieved:', data); 
+    console.log(apiKey); // Tambahkan log di sini
+    res.status(200).json({ status: true, statusCode: 200, data: data });
 }

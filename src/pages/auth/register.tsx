@@ -1,4 +1,7 @@
+import { useEffect } from "react";
+
 const registerPage = () => {
+ 
   return (
     <div>
       <h1>registerPage</h1>

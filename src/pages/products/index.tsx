@@ -16,7 +16,7 @@ const productPage = () => {
     if (!isLogin) {
       push("/auth/login");
     }
-  }, []);
+  });
 
   useEffect(() => {
     fetch("/api/productApi").then((res) => {
@@ -24,15 +24,13 @@ const productPage = () => {
         setProducts(response.data);
       });
     });
-  }, []);
+  });
   return (
     <div>
       <h1>product pages test</h1>
       {products.map((product: productType) => (
         <div key={product.id}>
           <p>{product.name}</p>
-          <p>{product.harga}</p>
-          <p>{product.ukuran}</p>
         </div>
       ))}
     </div>
