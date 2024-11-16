@@ -11,8 +11,7 @@ const productDetail = () => {
   console.log(data);
   // console.log()
   return (
-    <div>
-      <div>product Detail</div>
+    <div >
       <div><DetailProduct product={isLoading ? [] : data.data}/></div>
     </div>
   );
