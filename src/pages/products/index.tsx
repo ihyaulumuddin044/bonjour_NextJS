@@ -1,9 +1,8 @@
+import { fetcher } from "@/lib/swr/fetcher";
 import ProductView from "@/views/Product";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
-
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const productPage = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -14,10 +13,10 @@ const productPage = () => {
       push("/auth/login");
     }
   }, []);
-  const {data, error, isLoading} = useSWR("/api/productApi", fetcher);
-  // console.log(data)
-  // console.log(error)
-  // console.log(isLoading)
+  // fatch api mengunakan swr
+  const { data, error, isLoading } = useSWR("/api/productApi", fetcher);
+  // console.log(data);
+  
 
   // useEffect(() => {
   //   fetch("/api/productApi").then((res) => {
@@ -28,7 +27,7 @@ const productPage = () => {
   // }, []);
   return (
     <div>
-      <ProductView products={isLoading ? [] : data.data}/>
+      <ProductView products={isLoading ? [] : data.data} />
     </div>
   );
 };
