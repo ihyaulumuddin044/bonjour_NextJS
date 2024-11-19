@@ -5,7 +5,7 @@ import DetailProduct from "@/views/DetailProducts";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 
-const productDetail = ({ products }: { products: productType }) => {
+const ProductDetail = ({ products }: { products: productType }) => {
   const { query } = useRouter();
   // // fatch api mengunakan swr
   // const { data, error, isLoading } = useSWR(`/api/productApi/${query.id}`, fetcher);
@@ -13,12 +13,15 @@ const productDetail = ({ products }: { products: productType }) => {
   // console.log()
   return (
     <div>
+      {/* client-side-rendering */}
       {/* <div><DetailProduct product={isLoading ? [] : data.data}/></div> */}
+      {/* server-side-rendering */}
+      <DetailProduct product={products} />
     </div>
   );
 };
 
-export default productDetail;
+export default ProductDetail;
 
 export async function getServerSideProps({
   params,

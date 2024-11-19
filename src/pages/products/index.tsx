@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
 
-const productPage = () => {
+const ProductPage = () => {
   const [isLogin, setIsLogin] = useState(true);
   // const [products, setProducts] = useState([]);
   const { push } = useRouter();
@@ -32,4 +32,4 @@ const productPage = () => {
   );
 };
 
-export default productPage;
+export default ProductPage;

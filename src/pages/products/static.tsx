@@ -1,7 +1,7 @@
 import ProductView from "@/views/Product";
 import { productType } from "@/types/products.type";
 
-const productPage = ( props: { products: productType[] }) => {
+const ProductPage = ( props: { products: productType[] }) => {
     const { products } = props;
   return (
     <div>
@@ -11,15 +11,30 @@ const productPage = ( props: { products: productType[] }) => {
 };
 
 
-export async function getStaticProps() {
-  const res = await fetch("http://localhost:3000/api/productApi");
-  const response = await res.json();
-  console.log(response);
-  return {
-    props: {
-      products: response.data,
-    },
-  };
+export async function getServerSideProps() {
+  try {
+    const res = await fetch("http://localhost:3000/api/productApi");
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch products");
+    }
+
+    const response = await res.json();
+    return {
+      props: {
+        products: response.data || [],
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching data:", error);
+
+    return {
+      props: {
+        products: [],  // Kirim data kosong jika ada error
+      },
+    };
+  }
 }
-export default productPage;
+
+export default ProductPage;
 
