@@ -1,20 +1,34 @@
-import {collection, doc, getDoc, getDocs, getFirestore} from "firebase/firestore"
-import app from "./init"
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  getFirestore,
+} from "firebase/firestore";
+import app from "./init";
 
-const firestore = getFirestore(app)
+const firestore = getFirestore(app);
 
-export async function retriveData (collectionName: string) {
-    const snapshot = await getDocs(collection(firestore, collectionName));
-    const data = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-    })) 
-    
-    return data
+export async function retriveData(collectionName: string) {
+  const snapshot = await getDocs(collection(firestore, collectionName));
+  const data = snapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
+
+  return data;
 }
 
-export async function retriveDataByID (collectionName: string, id: string) {
-    const snapshot = await getDoc(doc(firestore, collectionName, id));
-    const data = snapshot.data()
-    return data; 
+export async function retriveDataByID(collectionName: string, id: string) {
+  const snapshot = await getDoc(doc(firestore, collectionName, id));
+  const data = snapshot.data();
+  return data;
+}
+
+export async function singUp(userData: {
+  email: string;
+  fullName: string;
+  password: string;
+},callback: Function) {
+  return singUp;
 }
