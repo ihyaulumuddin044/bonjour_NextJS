@@ -24,6 +24,7 @@ export async function getServerSideProps() {
       props: {
         products: response.data || [],
       },
+      // revalidate: 10,
     };
   } catch (error) {
     console.error("Error fetching data:", error);
