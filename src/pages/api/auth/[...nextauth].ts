@@ -1,5 +1,8 @@
+import { singIn } from "@/lib/firebase/service";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsPovider from "next-auth/providers/credentials";
+import bcrypt from "bcrypt";
+// import { signIn } from "next-auth/react";
 const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
@@ -9,24 +12,21 @@ const authOptions: NextAuthOptions = {
     CredentialsPovider({
       type: "credentials",
       credentials: {
-        fullName: { label: "fullName", type: "text" },
         email: { label: "email", type: "email" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials: any) {
-        const { email, password, fullName } = credentials as {
+        const { email, password } = credentials as {
           email: string;
           password: string;
-          fullName: string;
         };
-        const user: any = {
-          id: 1,
-          email: email,
-          password: password,
-          fullName: fullName,
-        };
+        const user: any = await singIn({ email, password });
         if (user) {
-          return user;
+          const passwordConfirm = await bcrypt.compare(password, user.password);
+          if (passwordConfirm) {
+            return user;
+          }
+          return null;
           console.log(user);
         } else {
           return null;
@@ -39,6 +39,7 @@ const authOptions: NextAuthOptions = {
       if (account?.provider == "credentials") {
         token.email = user.email;
         token.fullName = user.fullName;
+        token.role = user.role;
       }
       console.log({ token, account, user });
       return token;
@@ -50,9 +51,15 @@ const authOptions: NextAuthOptions = {
       if ("fullName" in token) {
         session.user.fullName = token.fullName;
       }
+      if ("role" in token) {
+        session.user.role = token.fullName;
+      }
       console.log(session, token);
       return session;
     },
+  },
+  pages: {
+    signIn: "/auth/login",
   },
 };
 
