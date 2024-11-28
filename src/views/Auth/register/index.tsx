@@ -3,6 +3,14 @@ import Style from "./register.module.scss";
 import { useRouter } from "next/router";
 
 const RegisterPagesView = () => {
+  const hendleSubmit = async (event: any) => {
+    event.preventDefault();
+    const data = {
+      email: event.target.email.value,
+      name: event.target.fullname.value,
+      password: event.target.password.value,
+    };
+  };
   return (
     <div className={Style.register}>
       <h1 className={Style.register__title}> register</h1>
@@ -53,11 +61,13 @@ const RegisterPagesView = () => {
             Register
           </button>
           <p className="mt-[15px]">
-            have an account? Sing in
-            {" "}
-            <Link href="/auth/login" className="text-blue-500 underline font-bold">
+            have an account? Sing in{" "}
+            <Link
+              href="/auth/login"
+              className="text-blue-500 underline font-bold"
+            >
               {" "}
-               Here
+              Here
             </Link>
           </p>
         </form>
