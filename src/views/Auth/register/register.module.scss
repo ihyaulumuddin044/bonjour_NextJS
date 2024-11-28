@@ -11,6 +11,10 @@
         font-size: 32px;
         margin-bottom: 20px;
     }
+    &__error{
+        color: red;
+        margin-bottom: 20px;
+    }
     &__form{
         width: 30%;
         box-shadow: 0 0 2px rgba($color: #000000, $alpha: 1);
