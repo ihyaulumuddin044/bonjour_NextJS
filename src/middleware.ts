@@ -13,7 +13,7 @@ export function mainMiddleware(req: NextRequest) {
   //   }
 }
 
-export default withAuth(mainMiddleware, ["/profile",]);
+export default withAuth(mainMiddleware, ["/profile", "/admin"]);
 // export const config = {
 //   matcher: ["/products", "/about/:path*"],
 // };

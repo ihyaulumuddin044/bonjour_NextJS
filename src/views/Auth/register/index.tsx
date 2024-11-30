@@ -13,7 +13,7 @@ const RegisterPagesView = () => {
     setIsLoading(true);
     const data = {
       email: event.target.email.value,
-      name: event.target.fullname.value,
+      fullName: event.target.fullname.value,
       password: event.target.password.value,
     };
     const result = await fetch("/api/auth/register", {

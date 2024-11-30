@@ -30,11 +30,11 @@ const LoginPagesView = () => {
         push(callbackUrl);
       } else {
         setIsLoading(false);
-        setError(res.error);
+        setError("email or password incorrect");
       }
     } catch (error: any) {
       setIsLoading(false);
-      setError(error.message);
+      setError("email or password incorrect");
     }
     // const result = await fetch("/api/auth/register", {
     //   method: "POST",
