@@ -7,7 +7,7 @@ const NavbarBody = () => {
     <div className={Style.navbar}>
       <div>Navbar body</div>
       <div >
-      {data && data.user.fullName}
+      {data && data.user.name}
       {data ? (
         <button className={Style.button} onClick={() => signOut()}> Sing out </button>
       ) : (

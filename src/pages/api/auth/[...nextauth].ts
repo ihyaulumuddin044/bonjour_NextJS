@@ -2,7 +2,8 @@ import { singIn } from "@/lib/firebase/service";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsPovider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
-// import { signIn } from "next-auth/react";
+
+
 const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
@@ -52,7 +53,7 @@ const authOptions: NextAuthOptions = {
         session.user.fullName = token.fullName;
       }
       if ("role" in token) {
-        session.user.role = token.fullName;
+        session.user.role = token.role;
       }
       console.log(session, token);
       return session;

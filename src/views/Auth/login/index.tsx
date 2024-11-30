@@ -8,33 +8,33 @@ const LoginPagesView = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const { push, query } = useRouter();
-  const callbackUrl: any = query.callbackUrl || "/"; 
+  const callbackUrl: any = query.callbackUrl || "/products";
   const hendleSubmit = async (event: any) => {
     event.preventDefault();
     setError("");
     setIsLoading(true);
-    const data = {
-      email: event.target.email.value,
-      name: event.target.fullname.value,
-      password: event.target.password.value,
-    };
+    // const data = {
+    //   email: event.target.email.value,
+    //   name: event.target.fullname.value,
+    //   password: event.target.password.value,
+    // };
     try {
-      const res = await signIn("credentials",{
+      const res = await signIn("credentials", {
         redirect: false,
-        email: event.tagret.email.value,
-        password: event.tagret.password.value,
+        email: event.target.email.value,
+        password: event.target.password.value,
         callbackUrl,
-      })
+      });
       if (!res?.error) {
         setIsLoading(false);
         push(callbackUrl);
-      }else{
+      } else {
         setIsLoading(false);
-        setError(res.error); 
+        setError(res.error);
       }
     } catch (error: any) {
       setIsLoading(false);
-      setError(error)
+      setError(error.message);
     }
     // const result = await fetch("/api/auth/register", {
     //   method: "POST",
