@@ -2,7 +2,7 @@ import { singIn } from "@/lib/firebase/service";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsPovider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
-
+import GoogleProvider from "next-auth/providers/google";
 
 const authOptions: NextAuthOptions = {
   session: {
@@ -34,6 +34,10 @@ const authOptions: NextAuthOptions = {
         }
       },
     }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_OAUTH_CLIENT_ID || "",
+      clientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET || "",
+    }),
   ],
   callbacks: {
     jwt({ token, account, profile, user }: any) {
@@ -41,6 +45,19 @@ const authOptions: NextAuthOptions = {
         token.email = user.email;
         token.fullName = user.fullName;
         token.role = user.role;
+      }
+      if (account?.provider == "google") {
+        const data = {
+          fullName: user.fullName || user.name,
+          email: user.email,
+          image: user.image,
+          type: "google",
+        };
+        // console.log(data);
+        token.email = data.email;
+        token.fullName = data.fullName;
+        token.type = data.type;
+        token.image = data.image;
       }
       console.log({ token, account, user });
       return token;
@@ -54,6 +71,9 @@ const authOptions: NextAuthOptions = {
       }
       if ("role" in token) {
         session.user.role = token.role;
+      }
+      if ("image" in token) {
+        session.user.image = token.image;
       }
       console.log(session, token);
       return session;

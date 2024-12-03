@@ -3,6 +3,7 @@ import Style from "./login.module.scss";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { signIn } from "next-auth/react";
+// import { FaGoogle } from "react-icons/fa";
 
 const LoginPagesView = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -92,6 +93,21 @@ const LoginPagesView = () => {
           >
             {isLoading ? "loading..." : "Login"}
           </button>
+          
+
+        </form>
+        <button
+            className={Style.Login__form__item__google}
+            onClick={() =>
+              signIn("google", {
+                callbackUrl,
+                redirect: false,
+              })
+            }
+          >
+            Login with Google
+          </button>
+          
           <p className="mt-[15px]">
             Don't have an account? Register{" "}
             <Link
@@ -102,7 +118,6 @@ const LoginPagesView = () => {
               Here
             </Link>
           </p>
-        </form>
       </div>
     </div>
   );

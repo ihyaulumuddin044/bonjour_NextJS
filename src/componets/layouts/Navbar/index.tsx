@@ -8,6 +8,7 @@ const NavbarBody = () => {
     <div className={Style.navbar}>
       <div><Link href="/products">Navbar body</Link></div>
       <div >
+      {/* {data && (data.user.fullName || data.user.name)} */}
       {data && data.user.fullName}
       {data ? (
         <button className={Style.button} onClick={() => signOut()}> Sing out </button>
