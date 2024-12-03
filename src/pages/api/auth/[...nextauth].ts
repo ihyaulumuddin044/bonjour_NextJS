@@ -1,4 +1,4 @@
-import { singIn } from "@/lib/firebase/service";
+import { signInWithGoogle, singIn } from "@/lib/firebase/service";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsPovider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
@@ -40,7 +40,7 @@ const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    jwt({ token, account, profile, user }: any) {
+    async jwt({ token, account, profile, user }: any) {
       if (account?.provider == "credentials") {
         token.email = user.email;
         token.fullName = user.fullName;
@@ -52,12 +52,18 @@ const authOptions: NextAuthOptions = {
           email: user.email,
           image: user.image,
           type: "google",
+          role: "member",
         };
+        await signInWithGoogle(data, (result: {status: boolean ,message: string; data: any}) => {
+          if (result.status) {
+            token.email = result.data.email;
+            token.fullName = result.data.fullName;
+            token.type = result.data.type;
+            token.image = result.data.image;
+            token.role = result.data.role;
+          }
+        });
         // console.log(data);
-        token.email = data.email;
-        token.fullName = data.fullName;
-        token.type = data.type;
-        token.image = data.image;
       }
       console.log({ token, account, user });
       return token;

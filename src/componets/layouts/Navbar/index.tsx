@@ -8,8 +8,8 @@ const NavbarBody = () => {
     <div className={Style.navbar}>
       <div><Link href="/products">Navbar body</Link></div>
       <div className={Style.profile} >
-      {/* {data && (data.user.fullName || data.user.name)} */}
       {data && data.user.image && (<img className={Style.avatar} src={data.user.image} alt="" />)}
+      {/* {data && (data.user.fullName || data.user.name)} */}
       {data && data.user.fullName}{" "}
       {data ? (
         <button className={Style.button} onClick={() => signOut()}> Sing out </button>
