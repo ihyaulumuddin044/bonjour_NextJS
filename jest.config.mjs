@@ -9,6 +9,24 @@ const createJestConfig = nextJest({
 // Add any custom config to be passed to Jest
 const config= {
     testEnvironment: 'jest-environment-jsdom', // Mengatur lingkungan pengujian ke jsdom
+    modulePaths: ['<rootDir>/src'],
+    collectCoverage: true,
+    collectCoverageFrom: [
+        '**/*.{js,jsx,ts,tsx}', 
+        '!**/*.d.ts',
+        '!**/node_modules/**',
+        '!**/*.type.ts',
+        '!<rootDir>/.next/**',
+        '!<rootDir>/coverage/**',
+        '!<rootDir>/*.config.js',
+        '!<rootDir>/src/middleware.ts',
+        '!<rootDir>/src/lib/**',
+        '!<rootDir>/src/middlewares/**',
+        '!<rootDir>/src/pages/api/**'
+        
+
+
+    ]
     // setupFilesAfterEnv: ['<rootDir>/jest.setup.js'], // Konfigurasi setup tambahan
   // Add more setup options before each test is run
   // setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],

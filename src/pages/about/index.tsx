@@ -3,7 +3,7 @@
 const AboutPages = () => {
   return (
     <div>
-      <h1>about pages</h1>
+      <h1 id="title" data-testid="title" >about pages</h1>
     </div>
   )
 }

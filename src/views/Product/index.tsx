@@ -7,9 +7,9 @@ const ProductView = ({ products }: { products: productType[] }) => {
     <div>
       <h1 className={style.product__title}>product pages test</h1>
       <div className={style.product__content}>
-        {products.length > 0 ? (
+        {products?.length > 0 ? (
           <>
-            {products.map((product: productType) => (
+            {products?.map((product: productType) => (
               <Link href={`/products/${product.id}`} key={product.id} className={style.product__content__item}>
                 <div className={style.product__content__item__image}>
                   <img src={product.image} alt="" />
